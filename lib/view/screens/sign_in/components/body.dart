@@ -1,3 +1,4 @@
+import 'package:e_commerce/core/services/auth_view_model.dart';
 import 'package:e_commerce/view/components/no_account_text.dart';
 import 'package:e_commerce/view/screens/sign_in/components/sign_form.dart';
 import 'package:e_commerce/view/components/social_card.dart';
@@ -6,8 +7,9 @@ import 'package:flutter/material.dart';
 
 import 'package:e_commerce/constants.dart';
 import 'package:e_commerce/size_config.dart';
+import 'package:get/get.dart';
 
-class Body extends StatelessWidget {
+class Body extends GetWidget<AuthViewModel> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -34,7 +36,9 @@ class Body extends StatelessWidget {
                   children: [
                     SocialCard(
                       icon: "assets/icons/google-icon.svg",
-                      press: () {},
+                      press: () {
+                        controller.googleSignInMethod();
+                      },
                     ),
                     SocialCard(
                       icon: "assets/icons/facebook-2.svg",
