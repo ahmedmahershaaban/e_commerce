@@ -28,5 +28,6 @@ class MyApp extends StatelessWidget {
   }
 }
 
-/// TOD*O: add the google services to IOS version
-/// TOD*O: add the dependencies for the google sign for IOS version
+/// TOD*O: add the google firebase project services to IOS version
+/// TOD*O: configure  Google login for IOS version
+/// TOD*O: configure facebook login for IOS version

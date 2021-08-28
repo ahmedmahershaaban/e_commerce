@@ -42,7 +42,9 @@ class Body extends GetWidget<AuthViewModel> {
                     ),
                     SocialCard(
                       icon: "assets/icons/facebook-2.svg",
-                      press: () {},
+                      press: () {
+                        controller.facebookLoginInMethod();
+                      },
                     ),
                     SocialCard(
                       icon: "assets/icons/twitter.svg",
