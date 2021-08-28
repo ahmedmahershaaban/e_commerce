@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "1078205092890",
+    "project_id": "e-commerce-resume",
+    "storage_bucket": "e-commerce-resume.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1078205092890:android:22efd4be5a53d1aaf26da3",
+        "android_client_info": {
+          "package_name": "com.ahmed.e_commerce"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1078205092890-6us6k71luraer760qt11nri578s6ro53.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ahmed.e_commerce",
+            "certificate_hash": "33e5bc7e5aef105df772c2b56f93740dc8cff34a"
+          }
+        },
+        {
+          "client_id": "1078205092890-dnrudjcvb11jh8ekmeaaclda61vn1mke.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAW42r214LTGdmAQSm1g2NWSQHeQ2hhNMo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1078205092890-dnrudjcvb11jh8ekmeaaclda61vn1mke.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
