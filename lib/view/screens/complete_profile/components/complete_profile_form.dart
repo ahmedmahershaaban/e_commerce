@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 
 import 'package:e_commerce/constants.dart';
 import 'package:e_commerce/size_config.dart';
+import 'package:get/get.dart';
 
 class CompleteProfileForm extends StatefulWidget {
   @override
@@ -38,10 +39,10 @@ class _CompleteProfileFormState extends State<CompleteProfileForm> {
           DefaultButton(
             text: "Continue",
             press: () {
+              _formKey.currentState!.save();
               if (_formKey.currentState!.validate()) {
-                _formKey.currentState!.save();
                 // move to complete profile screen
-                Navigator.pushNamed(context, OtpScreen.routeName);
+                Get.to(OtpScreen());
               }
             },
           ),

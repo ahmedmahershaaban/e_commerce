@@ -3,12 +3,9 @@ import 'package:flutter/material.dart';
 
 import 'package:e_commerce/constants.dart';
 import 'package:e_commerce/size_config.dart';
+import 'package:get/get.dart';
 
 class NoAccountText extends StatelessWidget {
-  const NoAccountText({
-    Key? key,
-  }) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -19,7 +16,7 @@ class NoAccountText extends StatelessWidget {
           style: TextStyle(fontSize: getProportionateScreenWidth(16)),
         ),
         GestureDetector(
-          onTap: () => Navigator.pushNamed(context, SignUpScreen.routeName),
+          onTap: () => Get.to(SignUpScreen()),
           child: Text(
             "Sign Up",
             style: TextStyle(

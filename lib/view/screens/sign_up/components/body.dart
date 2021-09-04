@@ -1,10 +1,12 @@
+import 'package:e_commerce/core/view_model/auth_view_model.dart';
 import 'package:e_commerce/view/components/social_card.dart';
 import 'package:e_commerce/constants.dart';
 import 'package:e_commerce/view/screens/sign_up/components/sign_up_form.dart';
 import 'package:e_commerce/size_config.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get_state_manager/src/simple/get_view.dart';
 
-class Body extends StatelessWidget {
+class Body extends GetWidget<AuthViewModel> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -29,11 +31,15 @@ class Body extends StatelessWidget {
                 children: [
                   SocialCard(
                     icon: "assets/icons/google-icon.svg",
-                    press: () {},
+                    press: () {
+                      controller.googleSignInMethod();
+                    },
                   ),
                   SocialCard(
                     icon: "assets/icons/facebook-2.svg",
-                    press: () {},
+                    press: () {
+                      controller.facebookSignInMethod();
+                    },
                   ),
                   SocialCard(
                     icon: "assets/icons/twitter.svg",

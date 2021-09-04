@@ -1,4 +1,4 @@
-import 'package:e_commerce/core/services/auth_view_model.dart';
+import 'package:e_commerce/core/view_model/auth_view_model.dart';
 import 'package:e_commerce/view/components/no_account_text.dart';
 import 'package:e_commerce/view/screens/sign_in/components/sign_form.dart';
 import 'package:e_commerce/view/components/social_card.dart';
@@ -43,7 +43,7 @@ class Body extends GetWidget<AuthViewModel> {
                     SocialCard(
                       icon: "assets/icons/facebook-2.svg",
                       press: () {
-                        controller.facebookLoginInMethod();
+                        controller.facebookSignInMethod();
                       },
                     ),
                     SocialCard(

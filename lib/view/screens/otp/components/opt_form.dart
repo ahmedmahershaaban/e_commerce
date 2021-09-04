@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 import 'package:e_commerce/constants.dart';
 import 'package:e_commerce/size_config.dart';
+import 'package:get/get.dart';
 
 class OtpForm extends StatefulWidget {
   @override
@@ -112,7 +113,7 @@ class _OtpFormState extends State<OtpForm> {
             DefaultButton(
               text: "Continue",
               press: () {
-                Navigator.pushNamed(context, HomeScreen.routeName);
+                Get.to(HomeScreen());
               },
             ),
           ],

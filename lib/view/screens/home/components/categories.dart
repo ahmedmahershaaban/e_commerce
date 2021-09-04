@@ -1,23 +1,13 @@
+import 'package:e_commerce/core/view_model/home_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 import 'package:e_commerce/size_config.dart';
+import 'package:get/get.dart';
 
-class Categories extends StatelessWidget {
-  const Categories({
-    Key? key,
-  }) : super(key: key);
-
+class Categories extends GetWidget<HomeViewModel> {
   @override
   Widget build(BuildContext context) {
-    List<Map<String, dynamic>> categories = [
-      {"icon": "assets/icons/Flash Icon.svg", "text": "Flash Deal"},
-      {"icon": "assets/icons/Bill Icon.svg", "text": "Bill"},
-      {"icon": "assets/icons/Game Icon.svg", "text": "Game"},
-      {"icon": "assets/icons/Gift Icon.svg", "text": "Daily Gift"},
-      {"icon": "assets/icons/Discover.svg", "text": "More"},
-    ];
-
     return Padding(
       padding:
           EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(20)),
@@ -26,10 +16,10 @@ class Categories extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           ...List.generate(
-            categories.length,
+            controller.categoryModel.length,
             (index) => CategoriesCard(
-              icon: categories[index]["icon"],
-              text: categories[index]["text"],
+              icon: controller.categoryModel[index].image,
+              text: controller.categoryModel[index].text,
               press: () {},
             ),
           ),
@@ -39,6 +29,21 @@ class Categories extends StatelessWidget {
   }
 }
 
+/*
+ GetBuilder<HomeViewModel>(
+          builder: (controller) => ListView.separated(
+              scrollDirection: Axis.horizontal,
+              itemBuilder: (context, index) => CategoriesCard(
+                    icon: controller.categoryModel[index].image,
+                    text: controller.categoryModel[index].text,
+                    press: () {},
+                  ),
+              separatorBuilder: (context, index) => SizedBox(
+                    width: getProportionateScreenWidth(10),
+                  ),
+              itemCount: controller.categoryModel.length),
+        )
+ */
 class CategoriesCard extends StatelessWidget {
   const CategoriesCard({
     Key? key,
@@ -66,7 +71,7 @@ class CategoriesCard extends StatelessWidget {
                   color: Color(0xFFFFECDF),
                   borderRadius: BorderRadius.circular(10),
                 ),
-                child: SvgPicture.asset(icon!),
+                child: SvgPicture.network(icon!),
               ),
             ),
             SizedBox(height: 5),

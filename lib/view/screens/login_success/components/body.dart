@@ -2,6 +2,7 @@ import 'package:e_commerce/view/components/default_button.dart';
 import 'package:e_commerce/view/screens/home/home_screen.dart';
 import 'package:e_commerce/size_config.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class Body extends StatelessWidget {
   @override
@@ -34,7 +35,7 @@ class Body extends StatelessWidget {
             child: DefaultButton(
               text: "Back to home",
               press: () {
-                Navigator.pushNamed(context, HomeScreen.routeName);
+                Get.offAll(HomeScreen());
               },
             ),
           ),

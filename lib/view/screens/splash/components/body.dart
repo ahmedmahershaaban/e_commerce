@@ -5,6 +5,7 @@ import 'package:e_commerce/size_config.dart';
 import 'package:flutter/material.dart';
 
 import 'package:e_commerce/view/screens/splash/components/splash_content.dart';
+import 'package:get/get.dart';
 
 class Body extends StatefulWidget {
   @override
@@ -72,7 +73,7 @@ class _BodyState extends State<Body> {
                     DefaultButton(
                       text: "Continue",
                       press: () {
-                        Navigator.pushNamed(context, SignInScreen.routeName);
+                        Get.to(SignInScreen());
                       },
                     ),
                     Spacer()
