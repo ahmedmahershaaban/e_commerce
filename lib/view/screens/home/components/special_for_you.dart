@@ -1,13 +1,11 @@
+import 'package:e_commerce/core/view_model/home_view_model.dart';
 import 'package:e_commerce/view/screens/home/components/section_title.dart';
 import 'package:flutter/material.dart';
 
 import 'package:e_commerce/size_config.dart';
+import 'package:get/get.dart';
 
-class SpecialForYou extends StatelessWidget {
-  const SpecialForYou({
-    Key? key,
-  }) : super(key: key);
-
+class SpecialForYou extends GetWidget<HomeViewModel> {
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -16,24 +14,41 @@ class SpecialForYou extends StatelessWidget {
         SizedBox(height: getProportionateScreenWidth(20)),
         SingleChildScrollView(
           scrollDirection: Axis.horizontal,
-          child: Row(
-            children: [
-              SpecialForYouCard(
-                category: "SmartPhones",
-                numOfBrands: 18,
-                press: () {},
-                image: "assets/images/Image Banner 2.png",
-              ),
-              SpecialForYouCard(
-                category: "Fashion",
-                numOfBrands: 24,
-                press: () {},
-                image: "assets/images/Image Banner 3.png",
-              ),
-              SizedBox(width: getProportionateScreenWidth(20)),
-            ],
+          child: GetBuilder<HomeViewModel>(
+            init: HomeViewModel(),
+            builder: (controller) => controller.isLoadingBanner.value
+                ? Center(child: CircularProgressIndicator())
+                : Row(
+                    children: [
+                      ...List.generate(
+                        controller.bannerModel!.length,
+                        (index) => SpecialForYouCard(
+                          category: controller.bannerModel![index].title,
+                          numOfBrands:
+                              controller.bannerModel![index].numOfBrands,
+                          press: () {},
+                          image: "${controller.bannerModel![index].image}",
+                        ),
+                      ),
+                      SizedBox(width: getProportionateScreenWidth(20)),
+                    ],
+                  ),
           ),
-        ),
+        )
+        // Row(
+        //   children: [
+        //     ListView.builder(
+        //       scrollDirection: Axis.horizontal,
+        //       itemCount: controller.bannerModel!.length,
+        //       itemBuilder: (context, index) => SpecialForYouCard(
+        //         category: controller.bannerModel![index].title,
+        //         numOfBrands: controller.bannerModel![index].numOfBrands,
+        //         press: () {},
+        //         image: "${controller.bannerModel![index].image}",
+        //       ),
+        //     ),
+        //   ],
+        // ),
       ],
     );
   }
@@ -41,14 +56,13 @@ class SpecialForYou extends StatelessWidget {
 
 class SpecialForYouCard extends StatelessWidget {
   const SpecialForYouCard({
-    Key? key,
     required this.category,
     required this.numOfBrands,
     required this.press,
     required this.image,
-  }) : super(key: key);
-  final String category, image;
-  final int numOfBrands;
+  });
+  final String? category, image;
+  final int? numOfBrands;
 
   final GestureTapCallback press;
   @override
@@ -67,8 +81,8 @@ class SpecialForYouCard extends StatelessWidget {
                     BorderRadius.circular(getProportionateScreenWidth(20)),
                 child: Stack(
                   children: [
-                    Image.asset(
-                      image,
+                    Image.network(
+                      "$image",
                       fit: BoxFit.cover,
                     ),
                     Container(

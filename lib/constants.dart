@@ -43,3 +43,13 @@ OutlineInputBorder outlineInputBorder() {
     borderSide: BorderSide(color: kTextColor),
   );
 }
+
+//*************************************************************DATABASE Constants **********************************************
+
+const String kTableCartProduct = 'cartProduct';
+const String kColumnId = 'id';
+const String kColumnTitle = 'title';
+const String kColumnImage = 'image';
+const String kColumnPrice = 'price';
+const String kColumnQuantity = 'quantity';
+const String kColumnColor = 'color';

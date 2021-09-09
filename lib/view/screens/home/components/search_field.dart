@@ -4,10 +4,6 @@ import 'package:e_commerce/constants.dart';
 import 'package:e_commerce/size_config.dart';
 
 class SearchField extends StatelessWidget {
-  const SearchField({
-    Key? key,
-  }) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return Container(

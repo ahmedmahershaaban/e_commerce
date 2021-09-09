@@ -1,14 +1,13 @@
 import 'package:e_commerce/constants.dart';
-import 'package:e_commerce/models/chart.dart';
+import 'package:e_commerce/models/cart_product_model.dart';
 import 'package:e_commerce/size_config.dart';
 import 'package:flutter/material.dart';
 
 class CartItemCard extends StatelessWidget {
   const CartItemCard({
-    Key? key,
-    required this.cart,
-  }) : super(key: key);
-  final Cart cart;
+    required this.cartProductModel,
+  });
+  final CartProductModel cartProductModel;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -23,7 +22,7 @@ class CartItemCard extends StatelessWidget {
                 decoration: BoxDecoration(
                     color: Color(0xFFF5F6F9),
                     borderRadius: BorderRadius.circular(15)),
-                child: Image.asset(cart.product.images[0]),
+                child: Image.network(cartProductModel.image!),
               ),
             ),
           ),
@@ -32,7 +31,7 @@ class CartItemCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                cart.product.title,
+                "${cartProductModel.title}",
                 style: TextStyle(color: Colors.black, fontSize: 16),
                 maxLines: 2,
               ),
@@ -41,10 +40,10 @@ class CartItemCard extends StatelessWidget {
                 TextSpan(
                   children: [
                     TextSpan(
-                      text: "\$${cart.product.price}",
+                      text: "\$${cartProductModel.price}",
                       style: TextStyle(color: kPrimaryColor),
                     ),
-                    TextSpan(text: "   x${cart.numberOfItems}"),
+                    TextSpan(text: "   x${cartProductModel.quantity}"),
                   ],
                 ),
               ),

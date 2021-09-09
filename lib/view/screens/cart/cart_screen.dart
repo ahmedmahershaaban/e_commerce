@@ -1,9 +1,10 @@
+import 'package:e_commerce/core/view_model/cart_view_model.dart';
 import 'package:e_commerce/view/components/default_button.dart';
 import 'package:e_commerce/constants.dart';
-import 'package:e_commerce/models/chart.dart';
 import 'package:e_commerce/size_config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 
 import 'components/body.dart';
 
@@ -28,9 +29,12 @@ class CartScreen extends StatelessWidget {
             "Your Cart",
             style: TextStyle(color: Colors.black),
           ),
-          Text(
-            "${demoCart.length} items",
-            style: Theme.of(context).textTheme.caption,
+          GetBuilder<CartViewModel>(
+            init: CartViewModel(),
+            builder: (controller) => Text(
+              "${controller.cartProductModel.length} items",
+              style: Theme.of(context).textTheme.caption,
+            ),
           )
         ],
       ),
@@ -39,10 +43,6 @@ class CartScreen extends StatelessWidget {
 }
 
 class CheckOurCart extends StatelessWidget {
-  const CheckOurCart({
-    Key? key,
-  }) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -65,55 +65,59 @@ class CheckOurCart extends StatelessWidget {
           ],
         ),
         child: SafeArea(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Row(
-                children: [
-                  Container(
-                    padding: EdgeInsets.all(10),
-                    width: getProportionateScreenWidth(40),
-                    height: getProportionateScreenWidth(40),
-                    decoration: BoxDecoration(
-                      color: Color(0xFFF5F6F9),
-                      borderRadius: BorderRadius.circular(10),
+          child: GetBuilder<CartViewModel>(
+            init: CartViewModel(),
+            builder: (controller) => Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Row(
+                  children: [
+                    Container(
+                      padding: EdgeInsets.all(10),
+                      width: getProportionateScreenWidth(40),
+                      height: getProportionateScreenWidth(40),
+                      decoration: BoxDecoration(
+                        color: Color(0xFFF5F6F9),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: SvgPicture.asset("assets/icons/receipt.svg"),
                     ),
-                    child: SvgPicture.asset("assets/icons/receipt.svg"),
-                  ),
-                  Spacer(),
-                  Text("Add voucher code"),
-                  SizedBox(width: 7),
-                  Icon(
-                    Icons.arrow_forward_ios,
-                    size: 12,
-                    color: kTextColor,
-                  )
-                ],
-              ),
-              SizedBox(height: getProportionateScreenWidth(20)),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text.rich(
-                    TextSpan(
-                      text: "Total:\n",
-                      children: [
-                        TextSpan(
-                            text: "\$337.15",
-                            style: TextStyle(fontSize: 16, color: Colors.black))
-                      ],
+                    Spacer(),
+                    Text("Add voucher code"),
+                    SizedBox(width: 7),
+                    Icon(
+                      Icons.arrow_forward_ios,
+                      size: 12,
+                      color: kTextColor,
+                    )
+                  ],
+                ),
+                SizedBox(height: getProportionateScreenWidth(20)),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text.rich(
+                      TextSpan(
+                        text: "Total:\n",
+                        children: [
+                          TextSpan(
+                              text: "\$${controller.totalPrice}",
+                              style:
+                                  TextStyle(fontSize: 16, color: Colors.black))
+                        ],
+                      ),
                     ),
-                  ),
-                  SizedBox(
-                    width: SizeConfig.screenWidth * 0.5,
-                    child: DefaultButton(
-                      text: "Check Out",
-                      press: () {},
-                    ),
-                  )
-                ],
-              )
-            ],
+                    SizedBox(
+                      width: SizeConfig.screenWidth * 0.5,
+                      child: DefaultButton(
+                        text: "Check Out",
+                        press: () {},
+                      ),
+                    )
+                  ],
+                )
+              ],
+            ),
           ),
         ));
   }

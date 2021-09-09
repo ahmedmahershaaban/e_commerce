@@ -4,10 +4,9 @@ import 'package:e_commerce/size_config.dart';
 
 class TopRoundedContainer extends StatelessWidget {
   const TopRoundedContainer({
-    Key? key,
     required this.color,
     required this.child,
-  }) : super(key: key);
+  });
   final Color color;
   final Widget child;
   @override

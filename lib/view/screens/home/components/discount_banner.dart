@@ -3,10 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:e_commerce/size_config.dart';
 
 class DiscountBanner extends StatelessWidget {
-  const DiscountBanner({
-    Key? key,
-  }) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return Container(

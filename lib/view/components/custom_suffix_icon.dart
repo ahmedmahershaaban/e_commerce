@@ -5,9 +5,8 @@ import 'package:e_commerce/size_config.dart';
 
 class CustomSuffixIcon extends StatelessWidget {
   const CustomSuffixIcon({
-    Key? key,
     required this.svgIcon,
-  }) : super(key: key);
+  });
   final String svgIcon;
   @override
   Widget build(BuildContext context) {

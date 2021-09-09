@@ -5,10 +5,9 @@ import 'package:e_commerce/size_config.dart';
 
 class SocialCard extends StatelessWidget {
   const SocialCard({
-    Key? key,
     this.icon,
     this.press,
-  }) : super(key: key);
+  });
   final String? icon;
   final Function? press;
   @override

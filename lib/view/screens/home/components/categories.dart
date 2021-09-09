@@ -5,27 +5,31 @@ import 'package:flutter_svg/svg.dart';
 import 'package:e_commerce/size_config.dart';
 import 'package:get/get.dart';
 
-class Categories extends GetWidget<HomeViewModel> {
+class Categories extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding:
-          EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(20)),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          ...List.generate(
-            controller.categoryModel.length,
-            (index) => CategoriesCard(
-              icon: controller.categoryModel[index].image,
-              text: controller.categoryModel[index].text,
-              press: () {},
-            ),
-          ),
-        ],
-      ),
-    );
+        padding:
+            EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(20)),
+        child: GetBuilder<HomeViewModel>(
+          init: HomeViewModel(),
+          builder: (controller) => controller.isLoadingCategory.value
+              ? Center(child: CircularProgressIndicator())
+              : Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    ...List.generate(
+                      controller.categoryModel!.length,
+                      (index) => CategoriesCard(
+                        icon: controller.categoryModel![index].image,
+                        text: controller.categoryModel![index].text,
+                        press: () {},
+                      ),
+                    ),
+                  ],
+                ),
+        ));
   }
 }
 
@@ -46,11 +50,10 @@ class Categories extends GetWidget<HomeViewModel> {
  */
 class CategoriesCard extends StatelessWidget {
   const CategoriesCard({
-    Key? key,
     this.icon,
     this.text,
     this.press,
-  }) : super(key: key);
+  });
 
   final String? icon, text;
   final GestureTapCallback? press;

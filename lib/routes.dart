@@ -1,6 +1,5 @@
 import 'package:e_commerce/view/screens/cart/cart_screen.dart';
 import 'package:e_commerce/view/screens/complete_profile/complete_profile_screen.dart';
-import 'package:e_commerce/view/screens/details/details_screen.dart';
 import 'package:e_commerce/view/screens/forget_password/forget_password_screen.dart';
 import 'package:e_commerce/view/screens/home/home_screen.dart';
 import 'package:e_commerce/view/screens/login_success/login_success_screen.dart';
@@ -20,7 +19,7 @@ final Map<String, WidgetBuilder> routes = {
   CompleteProfileScreen.routeName: (context) => CompleteProfileScreen(),
   OtpScreen.routeName: (context) => OtpScreen(),
   HomeScreen.routeName: (context) => HomeScreen(),
-  DetailsScreen.routeName: (context) => DetailsScreen(),
+  // DetailsScreen.routeName: (context) => DetailsScreen(),
   CartScreen.routeName: (context) => CartScreen(),
   ProfileScreen.routeName: (context) => ProfileScreen(),
 };
