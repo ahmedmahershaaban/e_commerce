@@ -53,3 +53,13 @@ const String kColumnImage = 'image';
 const String kColumnPrice = 'price';
 const String kColumnQuantity = 'quantity';
 const String kColumnColor = 'color';
+
+//*************************************************************SharedPreferences *************************************************
+
+const String CACHED_SHARED_PREFERENCES = "CACHED_SHARED_PREFERENCES";
+
+//*************************************************************SharedPreferences *************************************************
+
+const kTileHeight = 50.0;
+const kInProgressColor = Colors.black87;
+const kTodoColor = Color(0xffd1d2d7);
