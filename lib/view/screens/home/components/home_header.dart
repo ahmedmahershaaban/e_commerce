@@ -1,5 +1,7 @@
+import 'package:e_commerce/core/view_model/cart_view_model.dart';
 import 'package:e_commerce/view/screens/cart/cart_screen.dart';
 import 'package:e_commerce/view/screens/home/components/search_field.dart';
+import 'package:e_commerce/view/screens/notification/notification_screen.dart';
 import 'package:flutter/material.dart';
 
 import 'package:e_commerce/size_config.dart';
@@ -16,17 +18,25 @@ class HomeHeader extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           SearchField(),
-          IconBtnWithCounter(
-            svgAsset: "assets/icons/Cart Icon.svg",
-            press: () {
-              Get.to(CartScreen());
-            },
+          GetBuilder<CartViewModel>(
+            init: Get.find<CartViewModel>(),
+            builder: (controller) => IconBtnWithCounter(
+              svgAsset: "assets/icons/Cart Icon.svg",
+              press: () {
+                Get.to(CartScreen());
+              },
+              number: controller.cartProductModel.length,
+            ),
           ),
           IconBtnWithCounter(
             svgAsset: "assets/icons/Bell.svg",
-            press: () {},
-            number: 3,
+            press: () {
+              Get.to(NotificationScreen());
+            },
           ),
+          Container(
+            color: Colors.black,
+          )
         ],
       ),
     );

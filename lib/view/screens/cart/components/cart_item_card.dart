@@ -27,27 +27,29 @@ class CartItemCard extends StatelessWidget {
             ),
           ),
           SizedBox(width: getProportionateScreenWidth(20)),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                "${cartProductModel.title}",
-                style: TextStyle(color: Colors.black, fontSize: 16),
-                maxLines: 2,
-              ),
-              SizedBox(height: 10),
-              Text.rich(
-                TextSpan(
-                  children: [
-                    TextSpan(
-                      text: "\$${cartProductModel.price}",
-                      style: TextStyle(color: kPrimaryColor),
-                    ),
-                    TextSpan(text: "   x${cartProductModel.quantity}"),
-                  ],
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "${cartProductModel.title}",
+                  style: TextStyle(color: Colors.black, fontSize: 16),
+                  maxLines: 2,
                 ),
-              ),
-            ],
+                SizedBox(height: 10),
+                Text.rich(
+                  TextSpan(
+                    children: [
+                      TextSpan(
+                        text: "\$${cartProductModel.price}",
+                        style: TextStyle(color: kPrimaryColor),
+                      ),
+                      TextSpan(text: "   x${cartProductModel.quantity}"),
+                    ],
+                  ),
+                ),
+              ],
+            ),
           )
         ],
       ),

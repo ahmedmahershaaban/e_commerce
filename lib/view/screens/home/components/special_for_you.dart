@@ -1,5 +1,6 @@
 import 'package:e_commerce/core/view_model/home_view_model.dart';
 import 'package:e_commerce/view/screens/home/components/section_title.dart';
+import 'package:e_commerce/view/screens/view_product/view_product_screen.dart';
 import 'package:flutter/material.dart';
 
 import 'package:e_commerce/size_config.dart';
@@ -15,7 +16,7 @@ class SpecialForYou extends GetWidget<HomeViewModel> {
         SingleChildScrollView(
           scrollDirection: Axis.horizontal,
           child: GetBuilder<HomeViewModel>(
-            init: HomeViewModel(),
+            init: Get.find<HomeViewModel>(),
             builder: (controller) => controller.isLoadingBanner.value
                 ? Center(child: CircularProgressIndicator())
                 : Row(
@@ -26,7 +27,11 @@ class SpecialForYou extends GetWidget<HomeViewModel> {
                           category: controller.bannerModel![index].title,
                           numOfBrands:
                               controller.bannerModel![index].numOfBrands,
-                          press: () {},
+                          press: () {
+                            controller.filteredProducts(
+                                controller.bannerModel![index].title!);
+                            Get.to(ViewProductScreen(index: index));
+                          },
                           image: "${controller.bannerModel![index].image}",
                         ),
                       ),
@@ -35,20 +40,6 @@ class SpecialForYou extends GetWidget<HomeViewModel> {
                   ),
           ),
         )
-        // Row(
-        //   children: [
-        //     ListView.builder(
-        //       scrollDirection: Axis.horizontal,
-        //       itemCount: controller.bannerModel!.length,
-        //       itemBuilder: (context, index) => SpecialForYouCard(
-        //         category: controller.bannerModel![index].title,
-        //         numOfBrands: controller.bannerModel![index].numOfBrands,
-        //         press: () {},
-        //         image: "${controller.bannerModel![index].image}",
-        //       ),
-        //     ),
-        //   ],
-        // ),
       ],
     );
   }
@@ -81,9 +72,12 @@ class SpecialForYouCard extends StatelessWidget {
                     BorderRadius.circular(getProportionateScreenWidth(20)),
                 child: Stack(
                   children: [
-                    Image.network(
-                      "$image",
-                      fit: BoxFit.cover,
+                    Container(
+                      width: double.infinity,
+                      child: Image.network(
+                        "$image",
+                        fit: BoxFit.fill,
+                      ),
                     ),
                     Container(
                       decoration: BoxDecoration(

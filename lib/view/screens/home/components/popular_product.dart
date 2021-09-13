@@ -20,19 +20,27 @@ class PopularProduct extends GetWidget<HomeViewModel> {
         SingleChildScrollView(
           scrollDirection: Axis.horizontal,
           child: GetBuilder<HomeViewModel>(
-            init: HomeViewModel(),
+            init: Get.find<HomeViewModel>(),
             builder: (controller) => controller.isLoadingProduct.value
                 ? Center(child: CircularProgressIndicator())
                 : Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       ...List.generate(
-                        controller.productModel!.length,
+                        controller.productModel!.length > 12
+                            ? 12
+                            : controller.productModel!.length,
                         (index) => ProductCard(
                           product: controller.productModel![index],
+                          onFavPress: () {
+                            controller.changeFilteredIsFavorite(
+                                controller.productModel![index].id);
+                          },
                           press: () {
                             Get.to(DetailsScreen(
-                                productModel: controller.productModel![index]));
+                              // productModel: controller.productModel![index],
+                              index: index,
+                            ));
                           },
                         ),
                       ),
@@ -47,18 +55,3 @@ class PopularProduct extends GetWidget<HomeViewModel> {
     );
   }
 }
-// ListView.builder(
-//   scrollDirection: Axis.horizontal,
-//   itemCount: controller.productModel!.length,
-//   itemBuilder: (context, index) => ProductCard(
-//     product: controller.productModel![index],
-//     press: () {
-//       Get.to(
-//         DetailsScreen(
-//           productDetailsArguments: ProductDetailsArguments(
-//               product: controller.productModel![index]),
-//         ),
-//       );
-//     },
-//   ),
-// ),

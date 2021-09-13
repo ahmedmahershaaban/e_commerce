@@ -24,7 +24,7 @@ class Body extends StatelessWidget {
           SpecialForYou(),
           SizedBox(height: getProportionateScreenWidth(30)),
           PopularProduct(),
-          SizedBox(height: getProportionateScreenWidth(30)),
+          SizedBox(height: getProportionateScreenWidth(30))
         ],
       ),
     );

@@ -23,14 +23,21 @@ class ProductImages extends StatelessWidget {
             ),
           ),
         ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            ...List.generate(
-              images!.length,
-              (index) => buildSmallPreview(index),
-            )
-          ],
+        Padding(
+          padding:
+              EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(20)),
+          child: SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ...List.generate(
+                  images!.length,
+                  (index) => buildSmallPreview(index),
+                )
+              ],
+            ),
+          ),
         )
       ],
     );

@@ -11,7 +11,7 @@ class CartViewModel extends GetxController {
   List<CartProductModel> _cartProductModel = [];
 
   double? get totalPrice => _totalPrice;
-  double? _totalPrice = 0;
+  double? _totalPrice = 0.0;
 
   CartViewModel() {
     getAllProducts();
@@ -24,25 +24,25 @@ class CartViewModel extends GetxController {
     getTotalPrice();
     _isLoading.value = false;
     update();
-
-    print(
-        "Number of product after getAllProduct :  ${cartProductModel.length}");
   }
 
   addProduct(CartProductModel model) async {
     final dbHelper = CartDatabaseHelper.db;
-
     for (int i = 0; i < _cartProductModel.length; i++) {
       if (model.id == _cartProductModel[i].id) {
         _cartProductModel[i].quantity =
             _cartProductModel[i].quantity! + model.quantity!;
         updateProduct(_cartProductModel[i]);
-        print("found duplicate");
+        getTotalPrice();
+
         update();
         return;
       }
     }
+    _cartProductModel.add(model);
     await dbHelper.insert(model);
+    getTotalPrice();
+
     update();
   }
 
@@ -55,7 +55,11 @@ class CartViewModel extends GetxController {
   deleteProduct(int id) async {
     final dbHelper = CartDatabaseHelper.db;
     await dbHelper.delete(id);
+    for (int i = 0; i < _cartProductModel.length; i++) {
+      print(_cartProductModel[i].id);
+    }
     getAllProducts();
+
     update();
   }
 

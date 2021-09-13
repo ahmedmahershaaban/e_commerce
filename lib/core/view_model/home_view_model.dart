@@ -28,6 +28,48 @@ class HomeViewModel extends GetxController {
   List<ProductModel>? get productModel => _productModel;
   List<ProductModel> _productModel = [];
 
+  List<ProductModel>? get searchBar => _searchBar;
+  List<ProductModel> _searchBar = [];
+
+  List<ProductModel>? get filteredProductModel => _filteredProductModel;
+  List<ProductModel> _filteredProductModel = [];
+  String _kindOfFilter = "isFavourite";
+
+  changeFilteredIsFavorite(id) async {
+    for (int i = 0; i < _productModel.length; i++) {
+      if (_productModel[i].id == id) {
+        _productModel[i].isFavourite = !_productModel[i].isFavourite;
+        filteredProducts(_kindOfFilter);
+        await HomeService().updateFavoriteHeart(
+            docId: _productModel[i].id.toString(),
+            value: _productModel[i].isFavourite);
+        update();
+        return;
+      }
+    }
+  }
+
+  filteredProducts(String category) {
+    _kindOfFilter = category;
+    _filteredProductModel = [];
+    if (_kindOfFilter == "isFavourite") {
+      for (ProductModel model in _productModel) {
+        if (model.isFavourite) {
+          _filteredProductModel.add(model);
+        }
+      }
+      update();
+      return;
+    } else {
+      for (ProductModel model in _productModel) {
+        if (model.category == category) {
+          _filteredProductModel.add(model);
+        }
+      }
+      update();
+    }
+  }
+
   Future<void> getCategory() async {
     _isLoadingCategory.value = true;
     await HomeService().getCategory().then((value) {
@@ -57,7 +99,22 @@ class HomeViewModel extends GetxController {
         _productModel.add(ProductModel.fromJson(value[i].data() as Map));
       }
       _isLoadingProduct.value = false;
+      filteredProducts(_kindOfFilter);
       update();
     });
+  }
+
+  addProductToFirebase() {
+    HomeService().addProductToFirebase();
+  }
+
+  searchProducts(String searchWord) {
+    _searchBar = [];
+    _searchBar = _productModel
+        .where((searchProductModel) => searchProductModel.title!
+            .toLowerCase()
+            .contains(searchWord.toLowerCase()))
+        .toList();
+    update();
   }
 }

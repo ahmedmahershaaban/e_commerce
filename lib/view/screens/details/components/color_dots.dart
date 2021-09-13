@@ -1,4 +1,6 @@
 import 'package:e_commerce/core/view_model/details_view_model.dart';
+import 'package:e_commerce/core/view_model/home_view_model.dart';
+import 'package:e_commerce/models/product_model.dart';
 import 'package:e_commerce/view/components/rounded_icon_btn.dart';
 import 'package:flutter/material.dart';
 import 'package:e_commerce/helper/color_extension.dart';
@@ -7,55 +9,68 @@ import 'package:e_commerce/size_config.dart';
 import 'package:get/get.dart';
 
 class ColorDots extends StatelessWidget {
-  ColorDots({required this.colors});
+  ColorDots({required this.index, required this.filtered});
+  final bool filtered;
 
-  final List<String>? colors;
+  final int index;
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.fromLTRB(
-        getProportionateScreenWidth(20),
-        0,
-        getProportionateScreenWidth(20),
-        getProportionateScreenWidth(20),
-      ),
-      child: GetBuilder<DetailsViewModel>(
-        init: DetailsViewModel(),
-        builder: (controller) => Row(
-          children: [
-            ...List.generate(
-              colors!.length,
-              (index) => ColorDot(
-                color: "${colors![index]}".toColor(),
-                isSelected: controller.selectedColor == index ? true : false,
-                pressOnColor: () {
-                  controller.selectColor(index);
-                },
-              ),
-            ),
-            Spacer(),
-            RoundedIconBtn(
-                icon: Icons.remove,
-                press: () {
-                  controller.decreaseNumberOfItems();
-                }),
-            SizedBox(width: getProportionateScreenWidth(5)),
-            Text(
-              "x${controller.numberOfItems}",
-              style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 18,
-                  color: kPrimaryColor),
-            ),
-            SizedBox(width: getProportionateScreenWidth(5)),
-            RoundedIconBtn(
-                icon: Icons.add,
-                press: () {
-                  controller.increaseNumberOfItems();
-                }),
-          ],
+    ProductModel productModel = filtered
+        ? Get.find<HomeViewModel>().productModel![index]
+        : Get.find<HomeViewModel>().filteredProductModel![index];
+    return SizedBox(
+      height: getProportionateScreenWidth(60),
+      child: Padding(
+        padding: EdgeInsets.fromLTRB(
+          getProportionateScreenWidth(20),
+          0,
+          getProportionateScreenWidth(20),
+          getProportionateScreenWidth(20),
         ),
+        child: GetBuilder<DetailsViewModel>(
+            init: DetailsViewModel(),
+            builder: (controller) {
+              return Row(
+                children: [
+                  Expanded(
+                    child: ListView.builder(
+                      shrinkWrap: true,
+                      scrollDirection: Axis.horizontal,
+                      itemCount: productModel.colors!.length,
+                      itemBuilder: (context, index0) => ColorDot(
+                        color: "${productModel.colors![index0]}".toColor(),
+                        isSelected:
+                            controller.selectedColor == index0 ? true : false,
+                        pressOnColor: () {
+                          controller.selectColor(index0);
+                        },
+                      ),
+                    ),
+                  ),
+                  SizedBox(width: getProportionateScreenWidth(15)),
+                  RoundedIconBtn(
+                      icon: Icons.remove,
+                      press: () {
+                        controller.decreaseNumberOfItems();
+                      }),
+                  SizedBox(width: getProportionateScreenWidth(5)),
+                  Text(
+                    "x${controller.numberOfItems}",
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18,
+                        color: kPrimaryColor),
+                  ),
+                  SizedBox(width: getProportionateScreenWidth(5)),
+                  RoundedIconBtn(
+                      icon: Icons.add,
+                      press: () {
+                        controller.increaseNumberOfItems();
+                      }),
+                ],
+              );
+            }),
       ),
     );
   }

@@ -1,3 +1,4 @@
+import 'package:e_commerce/core/view_model/home_view_model.dart';
 import 'package:e_commerce/core/view_model/profile_view_model.dart';
 import 'package:e_commerce/view/screens/profile/components/profile_menu.dart';
 import 'package:e_commerce/view/screens/profile/components/profile_pic.dart';
@@ -28,7 +29,9 @@ class Body extends StatelessWidget {
                   ProfileMenu(
                     text: "Notifications",
                     icon: "assets/icons/Bell.svg",
-                    onPress: () {},
+                    onPress: () {
+                      Get.find<HomeViewModel>().addProductToFirebase();
+                    },
                   ),
                   ProfileMenu(
                     text: "Settings",

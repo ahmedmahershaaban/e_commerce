@@ -1,9 +1,10 @@
 import 'package:e_commerce/core/view_model/home_view_model.dart';
-import 'package:e_commerce/size_config.dart';
 import 'package:e_commerce/view/components/product_card.dart';
 import 'package:e_commerce/view/screens/details/details_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+import '../../../../size_config.dart';
 
 class Body extends StatelessWidget {
   @override

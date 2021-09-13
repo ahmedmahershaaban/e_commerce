@@ -2,6 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
 class DetailsViewModel extends GetxController {
+  @override
+  void onInit() {
+    super.onInit();
+  }
+
   int get selectedImage => _selectedImage;
   int _selectedImage = 0;
   int get selectedColor => _selectedColor;
@@ -10,8 +15,6 @@ class DetailsViewModel extends GetxController {
   int _numberOfItems = 1;
   int? get maxLines => _maxLines;
   int? _maxLines = 3;
-
-  bool _weAreIn = false;
 
   ValueNotifier<bool> get isFavourite => _isFavourite;
   ValueNotifier<bool> _isFavourite = ValueNotifier(false);
@@ -41,20 +44,14 @@ class DetailsViewModel extends GetxController {
     update();
   }
 
-  selectIsFavourite(bool value) {
-    if (!_weAreIn) {
-      _isFavourite.value = value;
-      _weAreIn = true;
-    }
-  }
-
-  changeIsFavourite() {
-    _isFavourite.value = !_isFavourite.value;
+  seeMoreDetailsClicked() {
+    _maxLines = null;
     update();
   }
 
-  seeMoreDetailsClicked() {
-    _maxLines = null;
+  getItemsCountNumber(index) {
+    print("HI");
+    _numberOfItems = index;
     update();
   }
 }

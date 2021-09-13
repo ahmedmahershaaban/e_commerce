@@ -12,7 +12,7 @@ class Categories extends StatelessWidget {
         padding:
             EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(20)),
         child: GetBuilder<HomeViewModel>(
-          init: HomeViewModel(),
+          init: Get.find<HomeViewModel>(),
           builder: (controller) => controller.isLoadingCategory.value
               ? Center(child: CircularProgressIndicator())
               : Row(
@@ -33,21 +33,6 @@ class Categories extends StatelessWidget {
   }
 }
 
-/*
- GetBuilder<HomeViewModel>(
-          builder: (controller) => ListView.separated(
-              scrollDirection: Axis.horizontal,
-              itemBuilder: (context, index) => CategoriesCard(
-                    icon: controller.categoryModel[index].image,
-                    text: controller.categoryModel[index].text,
-                    press: () {},
-                  ),
-              separatorBuilder: (context, index) => SizedBox(
-                    width: getProportionateScreenWidth(10),
-                  ),
-              itemCount: controller.categoryModel.length),
-        )
- */
 class CategoriesCard extends StatelessWidget {
   const CategoriesCard({
     this.icon,

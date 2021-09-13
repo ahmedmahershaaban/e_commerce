@@ -46,10 +46,10 @@ class Body extends GetWidget<AuthViewModel> {
                         controller.facebookSignInMethod();
                       },
                     ),
-                    SocialCard(
-                      icon: "assets/icons/twitter.svg",
-                      press: () {},
-                    ),
+                    // SocialCard(
+                    //   icon: "assets/icons/twitter.svg",
+                    //   press: () {},
+                    // ),
                   ],
                 ),
                 SizedBox(height: getProportionateScreenWidth(20)),

@@ -1,4 +1,5 @@
 import 'package:e_commerce/core/view_model/details_view_model.dart';
+import 'package:e_commerce/core/view_model/home_view_model.dart';
 import 'package:e_commerce/models/product_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -9,17 +10,20 @@ import 'package:get/get.dart';
 
 class ProductDescription extends StatelessWidget {
   const ProductDescription({
-    required this.product,
+    required this.index,
+    required this.filtered,
   });
-
-  final ProductModel? product;
+  final bool filtered;
+  final int index;
 
   @override
   Widget build(BuildContext context) {
     return GetBuilder<DetailsViewModel>(
         init: DetailsViewModel(),
         builder: (controller) {
-          controller.selectIsFavourite(product!.isFavourite);
+          ProductModel productModel = filtered
+              ? Get.find<HomeViewModel>().productModel![index]
+              : Get.find<HomeViewModel>().filteredProductModel![index];
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -27,7 +31,7 @@ class ProductDescription extends StatelessWidget {
                 padding: EdgeInsets.symmetric(
                     horizontal: getProportionateScreenWidth(20)),
                 child: Text(
-                  "${product!.title}",
+                  "${productModel.title}",
                   style: Theme.of(context).textTheme.headline6,
                 ),
               ),
@@ -35,27 +39,31 @@ class ProductDescription extends StatelessWidget {
                 alignment: Alignment.centerRight,
                 child: GestureDetector(
                   onTap: () {
-                    controller.changeIsFavourite();
+                    Get.find<HomeViewModel>()
+                        .changeFilteredIsFavorite(productModel.id);
                   },
-                  child: Container(
-                    padding: EdgeInsets.all(getProportionateScreenWidth(15)),
-                    width: getProportionateScreenWidth(64),
-                    decoration: BoxDecoration(
-                      color: controller.isFavourite.value
-                          ? kPrimaryColor.withOpacity(0.15)
-                          : kTextColor.withOpacity(0.1),
-                      borderRadius: BorderRadius.only(
-                        topLeft:
-                            Radius.circular(getProportionateScreenWidth(20)),
-                        bottomLeft:
-                            Radius.circular(getProportionateScreenWidth(20)),
+                  child: GetBuilder<HomeViewModel>(
+                    init: Get.find<HomeViewModel>(),
+                    builder: (controller) => Container(
+                      padding: EdgeInsets.all(getProportionateScreenWidth(15)),
+                      width: getProportionateScreenWidth(64),
+                      decoration: BoxDecoration(
+                        color: productModel.isFavourite
+                            ? kPrimaryColor.withOpacity(0.15)
+                            : kTextColor.withOpacity(0.1),
+                        borderRadius: BorderRadius.only(
+                          topLeft:
+                              Radius.circular(getProportionateScreenWidth(20)),
+                          bottomLeft:
+                              Radius.circular(getProportionateScreenWidth(20)),
+                        ),
                       ),
-                    ),
-                    child: SvgPicture.asset(
-                      "assets/icons/Heart Icon_2.svg",
-                      color: controller.isFavourite.value
-                          ? Color(0xFFFF4848)
-                          : Color(0xFFDBDEE4),
+                      child: SvgPicture.asset(
+                        "assets/icons/Heart Icon_2.svg",
+                        color: productModel.isFavourite
+                            ? Color(0xFFFF4848)
+                            : Color(0xFFDBDEE4),
+                      ),
                     ),
                   ),
                 ),
@@ -69,12 +77,12 @@ class ProductDescription extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "${product!.description}",
+                      "${productModel.description}",
                       maxLines: controller.maxLines,
                     ),
                     SizedBox(height: getProportionateScreenWidth(5)),
                     controller.maxLines != null
-                        ? product!.description!.length > 130
+                        ? productModel.description!.length > 130
                             ? GestureDetector(
                                 onTap: controller.seeMoreDetailsClicked,
                                 child: Text(

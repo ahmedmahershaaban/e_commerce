@@ -18,7 +18,7 @@ class CartProductModel {
     color = map['color'];
     image = map['image'];
     id = map['id'];
-    price = map['price'];
+    price = map['price'] + 0.0;
     quantity = map['quantity'];
   }
   toJson() {

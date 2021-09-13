@@ -1,7 +1,10 @@
+import 'package:e_commerce/core/view_model/cart_view_model.dart';
+import 'package:e_commerce/core/view_model/home_view_model.dart';
 import 'package:e_commerce/helper/binding.dart';
 import 'package:e_commerce/view/control_view.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 
 import 'theme.dart';
@@ -9,7 +12,8 @@ import 'theme.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-
+  Get.put(HomeViewModel());
+  Get.put(CartViewModel());
   runApp(MyApp());
 }
 

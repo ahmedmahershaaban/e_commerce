@@ -1,4 +1,5 @@
 import 'package:e_commerce/core/view_model/control_view_model.dart';
+import 'package:e_commerce/core/view_model/home_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -11,7 +12,7 @@ class CustomBottomNavBar extends GetWidget<ControlViewModel> {
     Color inActiveIconColor = Color(0xFFB6B6B6);
 
     return GetBuilder<ControlViewModel>(
-      init: ControlViewModel(),
+      init: Get.find<ControlViewModel>(),
       builder: (controller) => Container(
         padding: EdgeInsets.symmetric(vertical: 14),
         decoration: BoxDecoration(
@@ -43,6 +44,7 @@ class CustomBottomNavBar extends GetWidget<ControlViewModel> {
             ),
             IconButton(
               onPressed: () {
+                Get.find<HomeViewModel>().filteredProducts("isFavourite");
                 controller.changeSelectedValue(1);
               },
               icon: SvgPicture.asset(
