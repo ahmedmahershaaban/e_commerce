@@ -24,6 +24,7 @@ class Body extends StatelessWidget {
     ProductModel productModel = filtered
         ? Get.find<HomeViewModel>().productModel![index]
         : Get.find<HomeViewModel>().filteredProductModel![index];
+    print(productModel.toString());
     return SizedBox(
       width: double.infinity,
       child: SingleChildScrollView(

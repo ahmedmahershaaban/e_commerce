@@ -40,6 +40,7 @@ class PopularProduct extends GetWidget<HomeViewModel> {
                             Get.to(DetailsScreen(
                               // productModel: controller.productModel![index],
                               index: index,
+                              filtered: true,
                             ));
                           },
                         ),

@@ -20,9 +20,10 @@ class DetailsScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Color(0xFFF5F6F9),
       appBar: CustomAppBar(
-          rating: filtered
-              ? Get.find<HomeViewModel>().productModel![index].rating
-              : Get.find<HomeViewModel>().filteredProductModel![index].rating),
+        rating: filtered
+            ? Get.find<HomeViewModel>().productModel![index].rating
+            : Get.find<HomeViewModel>().filteredProductModel![index].rating,
+      ),
       body: Body(index: index, filtered: filtered),
     );
   }

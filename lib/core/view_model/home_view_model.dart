@@ -12,12 +12,30 @@ class HomeViewModel extends GetxController {
     getProduct();
   }
 
+  FocusNode focusNode = FocusNode();
+
+  @override
+  void onInit() {
+    focusNode.addListener(() {
+      _isLoadingSearch.value = true;
+    });
+    super.onInit();
+  }
+
+  // @override
+  // onClose() {
+  //   // focusNode.dispose();
+  //   super.onClose();
+  // }
+
   ValueNotifier<bool> get isLoadingCategory => _isLoadingCategory;
   ValueNotifier<bool> _isLoadingCategory = ValueNotifier(false);
   ValueNotifier<bool> get isLoadingBanner => _isLoadingBanner;
   ValueNotifier<bool> _isLoadingBanner = ValueNotifier(false);
   ValueNotifier<bool> get isLoadingProduct => _isLoadingProduct;
   ValueNotifier<bool> _isLoadingProduct = ValueNotifier(false);
+  ValueNotifier<bool> get isLoadingSearch => _isLoadingSearch;
+  ValueNotifier<bool> _isLoadingSearch = ValueNotifier(false);
 
   List<CategoryModel>? get categoryModel => _categoryModel;
   List<CategoryModel> _categoryModel = [];
@@ -27,9 +45,6 @@ class HomeViewModel extends GetxController {
 
   List<ProductModel>? get productModel => _productModel;
   List<ProductModel> _productModel = [];
-
-  List<ProductModel>? get searchBar => _searchBar;
-  List<ProductModel> _searchBar = [];
 
   List<ProductModel>? get filteredProductModel => _filteredProductModel;
   List<ProductModel> _filteredProductModel = [];
@@ -108,13 +123,24 @@ class HomeViewModel extends GetxController {
     HomeService().addProductToFirebase();
   }
 
+  searchBarStatus() {
+    focusNode.unfocus();
+    _isLoadingSearch.value = false;
+    update();
+  }
+
   searchProducts(String searchWord) {
-    _searchBar = [];
-    _searchBar = _productModel
+    _kindOfFilter = "Search";
+    List<ProductModel> list = _productModel
         .where((searchProductModel) => searchProductModel.title!
             .toLowerCase()
             .contains(searchWord.toLowerCase()))
         .toList();
+    if (list.length > 0) {
+      _filteredProductModel = list;
+    } else {
+      _filteredProductModel = [];
+    }
     update();
   }
 }
