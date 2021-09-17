@@ -37,15 +37,15 @@ class Body extends StatelessWidget {
       ),
     );
   }
-
-  List<Widget> searchBarController = [
-    DiscountBanner(),
-    SizedBox(height: getProportionateScreenWidth(30)),
-    Categories(),
-    SizedBox(height: getProportionateScreenWidth(30)),
-    SpecialForYou(),
-    SizedBox(height: getProportionateScreenWidth(30)),
-    PopularProduct(),
-    SizedBox(height: getProportionateScreenWidth(30)),
-  ];
 }
+
+List<Widget> searchBarController = [
+  DiscountBanner(),
+  SizedBox(height: getProportionateScreenWidth(30)),
+  Categories(),
+  SizedBox(height: getProportionateScreenWidth(30)),
+  SpecialForYou(),
+  SizedBox(height: getProportionateScreenWidth(30)),
+  PopularProduct(),
+  SizedBox(height: getProportionateScreenWidth(30)),
+];

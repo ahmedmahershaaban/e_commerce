@@ -1,4 +1,3 @@
-import 'package:e_commerce/constants.dart';
 import 'package:e_commerce/core/view_model/home_view_model.dart';
 import 'package:e_commerce/view/screens/details/details_screen.dart';
 import 'package:e_commerce/view/screens/home/components/search_bar_card.dart';
