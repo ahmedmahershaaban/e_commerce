@@ -1,4 +1,5 @@
 import 'package:e_commerce/view/components/default_button.dart';
+import 'package:e_commerce/view/control_view.dart';
 import 'package:e_commerce/view/screens/home/home_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -113,7 +114,7 @@ class _OtpFormState extends State<OtpForm> {
             DefaultButton(
               text: "Continue",
               press: () {
-                Get.to(HomeScreen());
+                Get.to(ControlView());
               },
             ),
           ],

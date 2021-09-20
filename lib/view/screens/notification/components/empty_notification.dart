@@ -11,9 +11,10 @@ class EmptyNotification extends StatelessWidget {
         children: [
           Image.asset("assets/images/empty_notification.png"),
           Text(
-            "You don't have new notifications yet",
+            "You don't have new notifications",
+            textAlign: TextAlign.center,
             style: TextStyle(
-                color: Colors.black, fontSize: getProportionateScreenWidth(20)),
+                color: Colors.black, fontSize: getProportionateScreenWidth(18)),
           ),
         ],
       ),

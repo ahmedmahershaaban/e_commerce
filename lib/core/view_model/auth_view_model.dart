@@ -16,7 +16,6 @@ class AuthViewModel extends GetxController {
 
   String? email = "", password = "", name = "";
   bool? remember = false;
-  List<String> errors = [];
 
   Rxn<User> _user = Rxn<User>();
   String? get user => _user.value?.email;

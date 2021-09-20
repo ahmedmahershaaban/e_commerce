@@ -1,4 +1,5 @@
 import 'package:e_commerce/core/view_model/auth_view_model.dart';
+import 'package:e_commerce/core/view_model/sign_up_view_model.dart';
 import 'package:e_commerce/view/components/custom_suffix_icon.dart';
 import 'package:e_commerce/view/components/default_button.dart';
 import 'package:e_commerce/view/components/form_error.dart';
@@ -24,7 +25,9 @@ class SignUpForm extends GetWidget<AuthViewModel> {
           SizedBox(height: getProportionateScreenWidth(20)),
           buildPasswordFormField(),
           SizedBox(height: getProportionateScreenWidth(15)),
-          FormError(errors: controller.errors),
+          GetBuilder<SignUpViewModel>(
+              init: SignUpViewModel(),
+              builder: (controller0) => FormError(errors: controller0.errors)),
           SizedBox(height: getProportionateScreenWidth(15)),
           DefaultButton(
             text: "Continue",
@@ -46,21 +49,23 @@ class SignUpForm extends GetWidget<AuthViewModel> {
       keyboardType: TextInputType.emailAddress,
       onSaved: (newValue) => controller.email = newValue,
       onChanged: (value) {
-        if (value.isNotEmpty && controller.errors.contains(kEmailNullError)) {
+        if (value.isNotEmpty &&
+            Get.find<SignUpViewModel>().errors.contains(kEmailNullError)) {
           removeError(kEmailNullError);
         } else if (emailValidatorRegExp.hasMatch(value) &&
-            controller.errors.contains(kInvalidEmailError)) {
+            Get.find<SignUpViewModel>().errors.contains(kInvalidEmailError)) {
           removeError(kInvalidEmailError);
         }
         return null;
       },
       validator: (value) {
-        if (value!.isEmpty && !controller.errors.contains(kEmailNullError)) {
+        if (value!.isEmpty &&
+            !Get.find<SignUpViewModel>().errors.contains(kEmailNullError)) {
           addError(kEmailNullError);
           return "";
         } else if (!emailValidatorRegExp.hasMatch(value) &&
-            !controller.errors.contains(kInvalidEmailError) &&
-            !controller.errors.contains(kEmailNullError)) {
+            !Get.find<SignUpViewModel>().errors.contains(kInvalidEmailError) &&
+            !Get.find<SignUpViewModel>().errors.contains(kEmailNullError)) {
           addError(kInvalidEmailError);
           return "";
         }
@@ -79,21 +84,23 @@ class SignUpForm extends GetWidget<AuthViewModel> {
       obscureText: true,
       onSaved: (newValue) => controller.password = newValue,
       onChanged: (value) {
-        if (value.isNotEmpty && controller.errors.contains(kPassNullError)) {
+        if (value.isNotEmpty &&
+            Get.find<SignUpViewModel>().errors.contains(kPassNullError)) {
           removeError(kPassNullError);
         } else if (value.length >= 8 &&
-            controller.errors.contains(kShortPassError)) {
+            Get.find<SignUpViewModel>().errors.contains(kShortPassError)) {
           removeError(kShortPassError);
         }
         return null;
       },
       validator: (value) {
-        if (value!.isEmpty && !controller.errors.contains(kPassNullError)) {
+        if (value!.isEmpty &&
+            !Get.find<SignUpViewModel>().errors.contains(kPassNullError)) {
           addError(kPassNullError);
           return "";
         } else if (value.length < 8 &&
-            !controller.errors.contains(kShortPassError) &&
-            !controller.errors.contains(kPassNullError)) {
+            !Get.find<SignUpViewModel>().errors.contains(kShortPassError) &&
+            !Get.find<SignUpViewModel>().errors.contains(kPassNullError)) {
           addError(kShortPassError);
           return "";
         }
@@ -111,31 +118,33 @@ class SignUpForm extends GetWidget<AuthViewModel> {
     return TextFormField(
       onSaved: (newValue) => controller.name = newValue,
       onChanged: (value) {
-        if (value.isNotEmpty && controller.errors.contains(kNameNullError)) {
+        if (value.isNotEmpty &&
+            Get.find<SignUpViewModel>().errors.contains(kNameNullError)) {
           removeError(kNameNullError);
         }
         return null;
       },
       validator: (value) {
-        if (value!.isEmpty && !controller.errors.contains(kNameNullError)) {
+        if (value!.isEmpty &&
+            !Get.find<SignUpViewModel>().errors.contains(kNameNullError)) {
           addError(kNameNullError);
           return "";
         }
         return null;
       },
       decoration: InputDecoration(
-        labelText: "Name",
-        hintText: "Enter Your Name",
+        labelText: "User Name",
+        hintText: "Enter User Name",
         suffixIcon: CustomSuffixIcon(svgIcon: "assets/icons/User.svg"),
       ),
     );
   }
 
   void addError(String errorName) {
-    controller.errors.add(errorName);
+    Get.find<SignUpViewModel>().addError(errorName);
   }
 
   void removeError(String errorName) {
-    controller.errors.remove(errorName);
+    Get.find<SignUpViewModel>().removeError(errorName);
   }
 }
